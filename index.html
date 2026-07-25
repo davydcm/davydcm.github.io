@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Davyd Carlos Martins — Analista de Sistemas</title>
+<meta name="description" content="Analista de Sistemas e Supervisor de TI em Florianópolis. Desenvolvimento de sistemas ERP e web com PHP, Laravel, Delphi e SQL Server.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14150F;
+    --bg-2:#0F100A;
+    --panel:#1D1F15;
+    --panel-2:#171911;
+    --line:#39402B;
+    --line-soft:#282C1D;
+    --cyan:#63C48C;
+    --cyan-dim:#417F5A;
+    --amber:#F0B429;
+    --text:#E7E8DB;
+    --muted:#9A9C88;
+    --muted-2:#6D7060;
+    --white:#F6F7EC;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html{scroll-behavior:smooth}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans',system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* Blueprint grid background */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+    background-size:52px 52px;
+    opacity:.35;
+    z-index:0;
+    pointer-events:none;
+    mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 90%);
+    -webkit-mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 90%);
+  }
+
+  .wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 28px}
+
+  /* Mono label helper */
+  .mono{font-family:'IBM Plex Mono',monospace}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--cyan);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:28px;height:1px;background:var(--cyan-dim);
+    display:inline-block;
+  }
+  .eyebrow .idx{color:var(--muted-2)}
+
+  /* ================= NAV ================= */
+  nav{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(10,18,29,.72);
+    border-bottom:1px solid var(--line-soft);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .brand{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;font-size:.9rem;letter-spacing:.02em;color:var(--white);
+    display:flex;align-items:center;gap:9px;
+  }
+  .brand .dot{width:7px;height:7px;background:var(--amber);border-radius:50%;box-shadow:0 0 10px var(--amber)}
+  .nav-links{display:flex;gap:30px}
+  .nav-links a{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem;color:var(--muted);text-decoration:none;
+    letter-spacing:.03em;transition:color .2s;
+  }
+  .nav-links a:hover{color:var(--cyan)}
+  @media(max-width:680px){.nav-links{display:none}}
+
+  /* ================= HERO ================= */
+  header{padding:92px 0 88px;position:relative}
+  .hero-grid{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
+  @media(max-width:760px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+
+  .hero h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:clamp(2.6rem,7vw,4.6rem);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    color:var(--white);
+    margin-bottom:20px;
+  }
+  .hero h1 .accent{color:var(--cyan)}
+  .hero .tag{
+    font-size:1.12rem;color:var(--muted);max-width:44ch;margin-bottom:34px;
+  }
+  .hero .tag strong{color:var(--text);font-weight:600}
+
+  /* schema record card */
+  .schema{
+    border:1px solid var(--line);
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border-radius:10px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.82rem;
+    width:308px;
+    overflow:hidden;
+    box-shadow:0 24px 60px -30px rgba(0,0,0,.8);
+  }
+  @media(max-width:760px){.schema{width:100%;max-width:340px}}
+  .schema-head{
+    display:flex;align-items:center;gap:8px;
+    padding:11px 15px;border-bottom:1px solid var(--line);
+    background:rgba(0,0,0,.2);
+    color:var(--muted-2);font-size:.72rem;letter-spacing:.08em;
+  }
+  .schema-head .d{width:9px;height:9px;border-radius:50%;border:1px solid var(--cyan-dim)}
+  .schema-head .d.on{background:var(--amber);border-color:var(--amber)}
+  .schema-body{padding:16px 15px}
+  .row{display:flex;gap:12px;padding:6px 0;opacity:0}
+  .row .k{color:var(--cyan-dim);width:64px;flex-shrink:0}
+  .row .v{color:var(--text)}
+  .row .v .hl{color:var(--amber)}
+  .avatar-ring{
+    margin:0 auto 20px;width:128px;height:128px;position:relative;
+  }
+  .avatar-ring img{
+    width:128px;height:128px;border-radius:50%;
+    border:2px solid var(--cyan-dim);display:block;object-fit:cover;
+    box-shadow:0 0 0 4px var(--panel-2),0 14px 34px -12px rgba(0,0,0,.7);
+  }
+  .avatar-ring::after{
+    content:"";position:absolute;inset:-9px;border-radius:50%;
+    border:1px dashed var(--cyan-dim);opacity:.55;
+    animation:spin 26s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    font-family:'IBM Plex Mono',monospace;font-size:.82rem;letter-spacing:.02em;
+    text-decoration:none;padding:12px 22px;border-radius:6px;
+    display:inline-flex;align-items:center;gap:9px;transition:all .2s;
+  }
+  .btn-primary{background:var(--cyan);color:var(--bg-2);font-weight:600}
+  .btn-primary:hover{background:var(--white);transform:translateY(-2px)}
+  .btn-ghost{border:1px solid var(--line);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+
+  /* ================= SECTIONS ================= */
+  section{padding:80px 0;border-top:1px solid var(--line-soft)}
+  .sec-title{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;
+    font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:-.015em;color:var(--white);
+    margin-bottom:14px;
+  }
+  .sec-lead{color:var(--muted);max-width:58ch;margin-bottom:44px;font-size:1.05rem}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:44px;align-items:start}
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:32px}}
+  .about-text p{color:var(--text);margin-bottom:18px}
+  .about-text p:last-child{margin-bottom:0}
+  .about-text strong{color:var(--white);font-weight:600}
+  .stat-stack{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .stat{background:var(--panel);padding:20px 22px}
+  .stat .n{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:var(--cyan);line-height:1}
+  .stat .l{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--muted);margin-top:7px;letter-spacing:.04em}
+
+  /* EXPERIENCE timeline */
+  .timeline{position:relative;padding-left:30px}
+  .timeline::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line)}
+  .job{position:relative;padding-bottom:38px}
+  .job:last-child{padding-bottom:0}
+  .job::before{
+    content:"";position:absolute;left:-29px;top:6px;width:11px;height:11px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--cyan-dim);
+  }
+  .job.active::before{border-color:var(--amber);background:var(--amber);box-shadow:0 0 12px var(--amber)}
+  .job .when{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--cyan);letter-spacing:.03em;margin-bottom:5px}
+  .job h3{font-family:'Space Grotesk',sans-serif;font-size:1.18rem;font-weight:600;color:var(--white)}
+  .job .org{font-size:.9rem;color:var(--muted);margin:2px 0 10px}
+  .job ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+  .job li{position:relative;padding-left:18px;font-size:.94rem;color:var(--text)}
+  .job li::before{content:"›";position:absolute;left:0;color:var(--cyan-dim)}
+
+  /* PROJECTS */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  @media(max-width:720px){.proj-grid{grid-template-columns:1fr}}
+  .proj{
+    border:1px solid var(--line);border-radius:10px;
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    padding:24px 24px 22px;position:relative;overflow:hidden;
+    transition:transform .25s,border-color .25s;
+  }
+  .proj:hover{transform:translateY(-4px);border-color:var(--cyan-dim)}
+  .proj::after{
+    content:attr(data-id);position:absolute;top:16px;right:20px;
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted-2);letter-spacing:.05em;
+  }
+  .proj .pdate{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--cyan);margin-bottom:12px}
+  .proj h3{font-family:'Space Grotesk',sans-serif;font-size:1.22rem;font-weight:600;color:var(--white);margin-bottom:10px;max-width:22ch}
+  .proj p{font-size:.92rem;color:var(--muted);margin-bottom:16px}
+  .stack{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{
+    font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.02em;
+    color:var(--cyan);border:1px solid var(--line);border-radius:4px;padding:3px 8px;
+    background:rgba(99,196,140,.05);
+  }
+
+  /* SKILLS */
+  .skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:720px){.skill-grid{grid-template-columns:1fr}}
+  .skill-card{border:1px solid var(--line);border-radius:10px;background:var(--panel-2);padding:22px}
+  .skill-card h4{font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:14px}
+  .skill-card .items{display:flex;flex-wrap:wrap;gap:8px}
+  .soft-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+  .soft{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--muted);border:1px dashed var(--line);border-radius:20px;padding:6px 16px}
+
+  /* EDUCATION */
+  .edu{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:720px){.edu{grid-template-columns:1fr}}
+  .edu-card{border-left:2px solid var(--cyan-dim);background:var(--panel-2);padding:20px 24px;border-radius:0 8px 8px 0}
+  .edu-card .yr{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--cyan);margin-bottom:6px}
+  .edu-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:4px}
+  .edu-card .inst{font-size:.9rem;color:var(--muted)}
+
+  /* CONTACT */
+  .contact{text-align:center;padding:96px 0 88px}
+  .contact .eyebrow{justify-content:center}
+  .contact h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2rem,5vw,3.1rem);color:var(--white);letter-spacing:-.02em;margin-bottom:16px}
+  .contact p{color:var(--muted);max-width:46ch;margin:0 auto 34px;font-size:1.05rem}
+  .contact .hero-cta{justify-content:center}
+
+  footer{border-top:1px solid var(--line-soft);padding:26px 0}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  footer .mono{font-size:.74rem;color:var(--muted-2);letter-spacing:.04em}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  .copy-link{
+    margin-top:18px;
+    background:none;border:none;cursor:pointer;
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.03em;
+    color:var(--muted);text-decoration:underline;text-underline-offset:4px;
+    text-decoration-color:var(--cyan-dim);transition:color .2s;
+  }
+  .copy-link:hover{color:var(--cyan)}
+  .copy-link.done{color:var(--amber);text-decoration-color:var(--amber)}
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+    .row{opacity:1!important}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>davyd.sys</div>
+    <div class="nav-links">
+      <a href="#sobre">sobre</a>
+      <a href="#experiencia">experiência</a>
+      <a href="#projetos">projetos</a>
+      <a href="#skills">skills</a>
+      <a href="#contato">contato</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero">
+        <div class="eyebrow"><span class="idx">v.2026</span> Analista de Sistemas</div>
+        <h1>Davyd Carlos<br><span class="accent">Martins</span></h1>
+        <p class="tag">Projeto, construo e mantenho <strong>sistemas ERP e web</strong> de ponta a ponta — do levantamento de requisitos à arquitetura de banco de dados e à entrega em produção.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#projetos">Ver projetos →</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/davydmartins/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="schema" aria-hidden="true">
+        <div class="schema-head">
+          <span class="d"></span><span class="d"></span><span class="d on"></span>
+          <span style="margin-left:auto">perfil.rec</span>
+        </div>
+        <div class="schema-body">
+          <div class="avatar-ring">
+            <img src="https://avatars.githubusercontent.com/u/13577085?v=4" alt="Foto de Davyd Carlos Martins" loading="eager" referrerpolicy="no-referrer" width="128" height="128">
+          </div>
+          <div class="row" style="animation-delay:.2s"><span class="k">papel</span><span class="v">Analista de Sistemas</span></div>
+          <div class="row" style="animation-delay:.35s"><span class="k">cargo</span><span class="v">Supervisor de TI</span></div>
+          <div class="row" style="animation-delay:.5s"><span class="k">local</span><span class="v">Florianópolis, BR</span></div>
+          <div class="row" style="animation-delay:.65s"><span class="k">stack</span><span class="v">PHP · Laravel · Delphi</span></div>
+          <div class="row" style="animation-delay:.8s"><span class="k">db</span><span class="v">SQL Server · MySQL</span></div>
+          <div class="row" style="animation-delay:.95s"><span class="k">status</span><span class="v"><span class="hl">● disponível</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="sobre">
+  <div class="wrap">
+    <div class="eyebrow"><span class="idx">01</span> Sobre</div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <h2 class="sec-title">Da regra de negócio à linha de código.</h2>
+        <p>Sou desenvolvedor e analista de sistemas com experiência sólida em traduzir necessidades de negócio em soluções que funcionam no dia a dia. Atuo desde o levantamento de requisitos com os usuários até a arquitetura, o desenvolvimento e a manutenção dos sistemas em produção.</p>
+        <p>Hoje sou <strong>Supervisor de TI</strong> e <strong>Analista de Sistemas</strong> na Fundação de Amparo à Pesquisa e Extensão Universitária, onde lidero o desenvolvimento de sistemas ERP e web e administro os bancos de dados. Também integro o <strong>Comitê de LGPD</strong> da instituição.</p>
+        <p>Antes disso, atuei por seis anos no Departamento de Língua e Literatura Estrangeira da UFSC, criando soluções como um sistema de agendamento de provas de proficiência e a automação de inscrições para eventos acadêmicos.</p>
+      </div>
+      <div class="stat-stack reveal">
+        <div class="stat"><div class="n">10+</div><div class="l">anos desenvolvendo software</div></div>
+        <div class="stat"><div class="n">ERP</div><div class="l">sistemas administrados</div></div>
+        <div class="stat"><div class="n">LGPD</div><div class="l">membro do comitê</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experiencia">
+  <div class="wrap">
+    <div class="eyebrow"><span class="idx">02</span> Trajetória</div>
+    <h2 class="sec-title reveal">Experiência profissional</h2>
+    <p class="sec-lead reveal">Uma progressão de desenvolvedor a analista e supervisor, sempre com a mão no código e nos dados.</p>
+
+    <div class="timeline">
+      <div class="job active reveal">
+        <div class="when">Fev 2025 — Presente</div>
+        <h3>Membro do Comitê de LGPD</h3>
+        <div class="org">Fundação de Amparo à Pesquisa e Extensão Universitária · Florianópolis, SC</div>
+        <ul>
+          <li>Participação nas reuniões do comitê e definição de diretrizes.</li>
+          <li>Tratamento de dados pessoais e apoio à tomada de decisões.</li>
+        </ul>
+      </div>
+      <div class="job active reveal">
+        <div class="when">Nov 2024 — Presente</div>
+        <h3>Supervisor de TI</h3>
+        <div class="org">Fundação de Amparo à Pesquisa e Extensão Universitária · Florianópolis, SC</div>
+        <ul>
+          <li>Liderança e coordenação das atividades da equipe de Tecnologia da Informação.</li>
+          <li>Levantamento de requisitos junto aos usuários e planejamento de desenvolvimento.</li>
+        </ul>
+      </div>
+      <div class="job active reveal">
+        <div class="when">Jan 2023 — Presente</div>
+        <h3>Analista de Sistemas</h3>
+        <div class="org">Fundação de Amparo à Pesquisa e Extensão Universitária · Florianópolis, SC</div>
+        <ul>
+          <li>Desenvolvimento de novas funcionalidades e relatórios para o sistema ERP.</li>
+          <li>Implementação de novas tecnologias e manutenção dos sistemas web.</li>
+          <li>Administração de banco de dados SQL Server, incluindo procedures e funções.</li>
+        </ul>
+      </div>
+      <div class="job reveal">
+        <div class="when">Ago 2016 — Jan 2023</div>
+        <h3>Desenvolvedor de Software</h3>
+        <div class="org">Fundação de Amparo à Pesquisa e Extensão Universitária · Florianópolis, SC</div>
+        <ul>
+          <li>Desenvolvimento de funcionalidades no sistema interno em Delphi.</li>
+          <li>Relatórios personalizados e manutenção de sistemas web com PHP e JavaScript.</li>
+          <li>Gestão e manutenção do banco de dados SQL Server.</li>
+        </ul>
+      </div>
+      <div class="job reveal">
+        <div class="when">6 anos</div>
+        <h3>Desenvolvedor</h3>
+        <div class="org">Departamento de Língua e Literatura Estrangeira — UFSC · Florianópolis, SC</div>
+        <ul>
+          <li>Desenvolvimento e manutenção de sistemas e sites do departamento.</li>
+          <li>Sistema de agendamento de provas e automação de inscrições para eventos.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projetos">
+  <div class="wrap">
+    <div class="eyebrow"><span class="idx">03</span> Portfólio</div>
+    <h2 class="sec-title reveal">Projetos selecionados</h2>
+    <p class="sec-lead reveal">Sistemas que desenhei e desenvolvi — da arquitetura do banco de dados à interface do usuário.</p>
+
+    <div class="proj-grid">
+      <div class="proj reveal" data-id="P-01">
+        <div class="pdate">Mai 2024 — Presente</div>
+        <h3>Sistema Administrativo de Eventos</h3>
+        <p>Plataforma completa para abertura e gestão de eventos, com inscrições, aprovações técnicas e controle de pagamentos (Boleto, PIX, Cartão e GRU). Arquitetura, banco de dados e desenvolvimento de ponta a ponta, com relatórios sob demanda.</p>
+        <div class="stack"><span class="chip">PHP 8</span><span class="chip">Laravel 11</span><span class="chip">MySQL</span><span class="chip">JavaScript</span><span class="chip">CSS</span></div>
+      </div>
+
+      <div class="proj reveal" data-id="P-02">
+        <div class="pdate">Fev 2024 — Presente</div>
+        <h3>Sistema de Reserva de Salas</h3>
+        <p>Solução em dois módulos: um portal cliente para verificar disponibilidade e solicitar reservas, e um módulo administrador para aprovações e envio automático de e-mails com boleto para pagamento.</p>
+        <div class="stack"><span class="chip">PHP</span><span class="chip">Delphi</span><span class="chip">JavaScript</span><span class="chip">SQL Server</span></div>
+      </div>
+
+      <div class="proj reveal" data-id="P-03">
+        <div class="pdate">Ago 2016 — Presente</div>
+        <h3>Portal do Coordenador</h3>
+        <p>Sistema de solicitações administrativas — compras, passagens, diárias e pagamentos — com emissão de relatórios financeiros e gestão de contas para coordenadores de projeto.</p>
+        <div class="stack"><span class="chip">PHP</span><span class="chip">SQL Server</span><span class="chip">HTML</span><span class="chip">CSS</span></div>
+      </div>
+
+      <div class="proj reveal" data-id="P-04">
+        <div class="pdate">Ago 2016 — Presente</div>
+        <h3>Sistema ERP</h3>
+        <p>Manutenção e evolução dos módulos de compras, financeiro e contabilidade do ERP corporativo, com desenvolvimento contínuo de funcionalidades e integração de dados.</p>
+        <div class="stack"><span class="chip">Delphi</span><span class="chip">SQL Server</span></div>
+      </div>
+
+      <div class="proj reveal" data-id="P-05">
+        <div class="pdate">Mar 2024</div>
+        <h3>Sistema para Cotação de Preços</h3>
+        <p>Ferramenta para envio de cotações a fornecedores e geração de relatórios comparativos de preços, apoiando decisões de compra com dados consolidados.</p>
+        <div class="stack"><span class="chip">Delphi</span><span class="chip">PHP</span><span class="chip">JavaScript</span><span class="chip">SQL Server</span></div>
+      </div>
+
+      <div class="proj reveal" data-id="P-06">
+        <div class="pdate">2015 — 2016 · UFSC / DLLE</div>
+        <h3>Sites Proficiência & Cursos Extra</h3>
+        <p>Arquitetura e desenvolvimento dos portais de proficiência em idiomas e de gerenciamento de cursos do Departamento de Língua e Literaturas Estrangeiras da UFSC.</p>
+        <div class="stack"><span class="chip">PHP</span><span class="chip">Bootstrap</span><span class="chip">JavaScript</span><span class="chip">MySQL</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow"><span class="idx">04</span> Competências</div>
+    <h2 class="sec-title reveal">Stack técnico</h2>
+    <p class="sec-lead reveal">As ferramentas que uso para transformar requisitos em sistemas confiáveis.</p>
+
+    <div class="skill-grid">
+      <div class="skill-card reveal">
+        <h4>Linguagens</h4>
+        <div class="items"><span class="chip">PHP</span><span class="chip">Delphi</span><span class="chip">Java</span><span class="chip">JavaScript</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <h4>Frameworks & Front</h4>
+        <div class="items"><span class="chip">Laravel</span><span class="chip">Bootstrap</span><span class="chip">CSS</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <h4>Banco de Dados</h4>
+        <div class="items"><span class="chip">SQL Server</span><span class="chip">MySQL</span><span class="chip">Procedures</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <h4>Sistemas</h4>
+        <div class="items"><span class="chip">ERP</span><span class="chip">Análise de Sistemas</span><span class="chip">Relatórios</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <h4>Processos</h4>
+        <div class="items"><span class="chip">Requisitos</span><span class="chip">LGPD</span><span class="chip">Suporte Técnico</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <h4>Dados</h4>
+        <div class="items"><span class="chip">Big Data Analytics</span><span class="chip">Ciência de Dados</span></div>
+      </div>
+    </div>
+
+    <div class="soft-row reveal">
+      <span class="soft">criatividade</span>
+      <span class="soft">comunicação</span>
+      <span class="soft">adaptabilidade</span>
+      <span class="soft">resiliência</span>
+      <span class="soft">empatia</span>
+    </div>
+  </div>
+</section>
+
+<section id="formacao">
+  <div class="wrap">
+    <div class="eyebrow"><span class="idx">05</span> Formação</div>
+    <h2 class="sec-title reveal">Formação acadêmica</h2>
+    <p class="sec-lead reveal">Base em gestão de TI, com especialização em dados.</p>
+    <div class="edu">
+      <div class="edu-card reveal">
+        <div class="yr">2018 — 2019</div>
+        <h3>Pós-Graduação em Ciência de Dados e Big Data Analytics</h3>
+        <div class="inst">Universidade Estácio de Sá</div>
+      </div>
+      <div class="edu-card reveal">
+        <div class="yr">2015 — 2018</div>
+        <h3>Gestão da Tecnologia da Informação</h3>
+        <div class="inst">Universidade Estácio de Sá</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="contact">
+  <div class="wrap">
+    <div class="eyebrow"><span class="idx">06</span> Contato</div>
+    <h2>Vamos construir algo juntos.</h2>
+    <p>Aberto a conversas sobre projetos, sistemas e oportunidades. É só chamar.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" id="mailBtn" href="#" rel="nofollow noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+        <span id="mailText">carregando e-mail…</span>
+      </a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/davydmartins/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/davydcm" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button id="copyMail" class="copy-link" type="button">copiar e-mail</button>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="mono">© 2026 Davyd Carlos Martins</span>
+    <span class="mono">Florianópolis · Brasil</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12, rootMargin:"0px 0px -40px 0px"});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ===== E-mail protegido contra coletores de spam =====
+  // O endereço nunca aparece inteiro no HTML: é remontado aqui, em partes.
+  (function(){
+    var user = ['davy','dcm'].join('');      // parte local
+    var host = ['gmail','com'].join('.');     // domínio
+    var at   = String.fromCharCode(64);       // "@" fora do HTML
+    var addr = user + at + host;
+
+    var textEl = document.getElementById('mailText');
+    var btn    = document.getElementById('mailBtn');
+    var copy   = document.getElementById('copyMail');
+
+    if(textEl) textEl.textContent = addr;
+    if(btn){
+      // href só é montado quando o usuário interage
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        window.location.href = 'mailto:' + addr;
+      });
+    }
+    if(copy){
+      copy.addEventListener('click', function(){
+        var done = function(){
+          copy.textContent = '✓ e-mail copiado';
+          copy.classList.add('done');
+          setTimeout(function(){ copy.textContent = 'copiar e-mail'; copy.classList.remove('done'); }, 2200);
+        };
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(addr).then(done).catch(function(){ window.prompt('Copie o e-mail:', addr); });
+        } else {
+          window.prompt('Copie o e-mail:', addr);
+        }
+      });
+    }
+  })();
+
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('.schema .row').forEach(r=>{
+      r.style.animation = 'rowIn .5s ease forwards';
+    });
+    const s = document.createElement('style');
+    s.textContent = '@keyframes rowIn{to{opacity:1}}';
+    document.head.appendChild(s);
+  }
+</script>
+</body>
+</html>
