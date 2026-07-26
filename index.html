@@ -53,15 +53,31 @@
     pointer-events:none;
     mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 90%);
     -webkit-mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 90%);
-    animation:gridDrift 30s linear infinite;
   }
-  @keyframes gridDrift{from{background-position:0 0}to{background-position:52px 52px}}
 
-  /* rede de nós animada (fundo) */
-  #bg-canvas{
-    position:fixed;inset:0;z-index:0;pointer-events:none;
-    opacity:.55;
+  /* fundo animado: Aurora / gradiente suave */
+  .aurora{
+    position:fixed;inset:-25%;z-index:-1;pointer-events:none;overflow:hidden;
   }
+  .aurora::before,.aurora::after{
+    content:"";position:absolute;inset:-12%;filter:blur(80px);
+  }
+  .aurora::before{
+    opacity:.6;
+    background:
+      radial-gradient(40% 46% at 24% 30%,rgba(99,196,140,.30),transparent 60%),
+      radial-gradient(38% 42% at 80% 24%,rgba(65,127,90,.34),transparent 62%);
+    animation:aur1 24s ease-in-out infinite alternate;
+  }
+  .aurora::after{
+    opacity:.5;
+    background:
+      radial-gradient(44% 50% at 66% 78%,rgba(240,180,41,.12),transparent 60%),
+      radial-gradient(40% 46% at 28% 80%,rgba(99,196,140,.22),transparent 62%);
+    animation:aur2 31s ease-in-out infinite alternate;
+  }
+  @keyframes aur1{0%{transform:translate(0,0) scale(1)}100%{transform:translate(4%,-3%) scale(1.14)}}
+  @keyframes aur2{0%{transform:translate(0,0) scale(1.06)}100%{transform:translate(-4%,3%) scale(1)}}
 
   .wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 28px}
 
@@ -224,13 +240,27 @@
     border:1px solid var(--line);border-radius:10px;
     background:linear-gradient(180deg,var(--panel),var(--panel-2));
     padding:24px 24px 22px;position:relative;overflow:hidden;
-    transition:transform .25s,border-color .25s;
+    transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s,box-shadow .35s;
   }
-  .proj:hover{transform:translateY(-4px);border-color:var(--cyan-dim)}
+  .proj::before{
+    content:"";position:absolute;left:0;top:0;height:2px;width:0;
+    background:linear-gradient(90deg,var(--cyan),rgba(99,196,140,0));
+    transition:width .45s cubic-bezier(.2,.7,.2,1);
+  }
+  .proj:hover{
+    transform:translateY(-6px);
+    border-color:var(--cyan-dim);
+    box-shadow:0 20px 44px -22px rgba(0,0,0,.7), 0 0 22px -6px rgba(99,196,140,.28);
+  }
+  .proj:hover::before{width:100%}
+  .proj:hover h3{color:var(--cyan)}
+  .proj h3{transition:color .35s}
   .proj::after{
     content:attr(data-id);position:absolute;top:16px;right:20px;
     font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted-2);letter-spacing:.05em;
+    transition:color .35s;
   }
+  .proj:hover::after{color:var(--cyan-dim)}
   .proj .pdate{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--cyan);margin-bottom:12px}
   .proj h3{font-family:'Space Grotesk',sans-serif;font-size:1.22rem;font-weight:600;color:var(--white);margin-bottom:10px;max-width:22ch}
   .proj p{font-size:.92rem;color:var(--muted);margin-bottom:16px}
@@ -257,6 +287,28 @@
   .edu-card .yr{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--cyan);margin-bottom:6px}
   .edu-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:4px}
   .edu-card .inst{font-size:.9rem;color:var(--muted)}
+
+  /* COURSES */
+  .courses{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .course{
+    background:var(--panel-2);padding:17px 22px;
+    display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
+    transition:background .25s;position:relative;
+  }
+  .course:hover{background:var(--panel)}
+  .course .c-name{font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--text);font-size:1rem;line-height:1.35}
+  .course:hover .c-name{color:var(--cyan)}
+  .course .c-inst{font-family:'IBM Plex Mono',monospace;font-size:.76rem;color:var(--muted);margin-top:3px;letter-spacing:.02em}
+  .course .c-meta{display:flex;align-items:center;gap:12px;flex-shrink:0}
+  .course .c-hours{
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--cyan);
+    border:1px solid var(--line);border-radius:4px;padding:3px 9px;background:rgba(99,196,140,.05);white-space:nowrap;
+  }
+  .course .c-date{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--muted-2);white-space:nowrap}
+  @media(max-width:560px){
+    .course{align-items:flex-start}
+    .course .c-meta{gap:10px}
+  }
 
   /* CONTACT */
   .contact{text-align:center;padding:96px 0 88px}
@@ -322,20 +374,11 @@
   @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(240,180,41,.5)}50%{box-shadow:0 0 12px 3px rgba(240,180,41,.5)}}
   @keyframes pulseGreen{0%,100%{box-shadow:0 0 0 0 rgba(99,196,140,.5)}50%{box-shadow:0 0 12px 3px rgba(99,196,140,.45)}}
 
-  /* ===== inclinação + brilho dos cards de projeto ===== */
-  .proj{transform-style:preserve-3d;will-change:transform}
-  .proj .glare{
-    position:absolute;inset:0;border-radius:10px;pointer-events:none;opacity:0;
-    background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(99,196,140,.16),transparent 45%);
-    transition:opacity .3s;
-  }
-  .proj:hover .glare{opacity:1}
-
   /* ===== brilho que segue o cursor no topo ===== */
   header{--gx:50%;--gy:32%}
   header::after{
     content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
-    background:radial-gradient(340px circle at var(--gx) var(--gy),rgba(99,196,140,.09),transparent 70%);
+    background:radial-gradient(340px circle at var(--gx) var(--gy),rgba(99,196,140,.10),transparent 70%);
     opacity:0;transition:opacity .5s;
   }
   header:hover::after{opacity:1}
@@ -355,6 +398,7 @@
 </head>
 <body>
 
+<div class="aurora" aria-hidden="true"></div>
 <div id="progress"></div>
 
 <nav>
@@ -484,48 +528,76 @@
 <section id="projetos">
   <div class="wrap">
     <div class="eyebrow"><span class="idx">03</span> Portfólio</div>
-    <h2 class="sec-title reveal">Projetos selecionados</h2>
-    <p class="sec-lead reveal">Sistemas que desenhei e desenvolvi — da arquitetura do banco de dados à interface do usuário.</p>
+    <h2 class="sec-title reveal">Projetos &amp; iniciativas</h2>
+    <p class="sec-lead reveal">Projetos que liderei, analisei e desenvolvi — da definição de requisitos e documentação à arquitetura de banco de dados e à entrega em produção.</p>
 
     <div class="proj-grid">
       <div class="proj reveal" data-id="P-01">
+        <div class="pdate">Jan 2026 — Presente</div>
+        <h3>Portal do Fornecedor</h3>
+        <p>Condução da análise de um novo portal voltado aos fornecedores: levantamento de requisitos, elaboração da documentação, acompanhamento do desenvolvimento, code reviews e apoio técnico à equipe.</p>
+        <div class="stack"><span class="chip">Requisitos</span><span class="chip">Documentação</span><span class="chip">Code review</span><span class="chip">Liderança técnica</span></div>
+      </div>
+
+      <div class="proj reveal" data-id="P-02">
+        <div class="pdate">Mai 2026 — Presente</div>
+        <h3>Portal do Colaborador</h3>
+        <p>Análise e documentação de um portal para colaboradores, do levantamento de requisitos ao acompanhamento das entregas e revisão de código, dando suporte constante aos desenvolvedores.</p>
+        <div class="stack"><span class="chip">Requisitos</span><span class="chip">Documentação</span><span class="chip">Code review</span></div>
+      </div>
+
+      <div class="proj reveal" data-id="P-03">
+        <div class="pdate">Jan 2025 — Presente</div>
+        <h3>Liderança no desenvolvimento de projetos</h3>
+        <p>Liderança técnica no desenvolvimento de projetos: análise de requisitos, documentação, acompanhamento das entregas, code reviews e apoio contínuo à equipe de desenvolvimento.</p>
+        <div class="stack"><span class="chip">Liderança</span><span class="chip">Análise de requisitos</span><span class="chip">Code review</span></div>
+      </div>
+
+      <div class="proj reveal" data-id="P-04">
+        <div class="pdate">Jan 2025 — Presente</div>
+        <h3>Criação de novos projetos</h3>
+        <p>Iniciativa na concepção de novos sistemas: reuniões com os setores para entender suas dores, levantamento de requisitos e elaboração da documentação que dá origem aos projetos.</p>
+        <div class="stack"><span class="chip">Iniciativa</span><span class="chip">Requisitos</span><span class="chip">Documentação</span></div>
+      </div>
+
+      <div class="proj reveal" data-id="P-05">
         <div class="pdate">Mai 2024 — Presente</div>
         <h3>Sistema Administrativo de Eventos</h3>
         <p>Plataforma completa para abertura e gestão de eventos, com inscrições, aprovações técnicas e controle de pagamentos (Boleto, PIX, Cartão e GRU). Arquitetura, banco de dados e desenvolvimento de ponta a ponta, com relatórios sob demanda.</p>
         <div class="stack"><span class="chip">PHP 8</span><span class="chip">Laravel 11</span><span class="chip">MySQL</span><span class="chip">JavaScript</span><span class="chip">CSS</span></div>
       </div>
 
-      <div class="proj reveal" data-id="P-02">
+      <div class="proj reveal" data-id="P-06">
         <div class="pdate">Fev 2024 — Presente</div>
         <h3>Sistema de Reserva de Salas</h3>
         <p>Solução em dois módulos: um portal cliente para verificar disponibilidade e solicitar reservas, e um módulo administrador para aprovações e envio automático de e-mails com boleto para pagamento.</p>
         <div class="stack"><span class="chip">PHP</span><span class="chip">Delphi</span><span class="chip">JavaScript</span><span class="chip">SQL Server</span></div>
       </div>
 
-      <div class="proj reveal" data-id="P-03">
-        <div class="pdate">Ago 2016 — Presente</div>
-        <h3>Portal do Coordenador</h3>
-        <p>Sistema de solicitações administrativas — compras, passagens, diárias e pagamentos — com emissão de relatórios financeiros e gestão de contas para coordenadores de projeto.</p>
-        <div class="stack"><span class="chip">PHP</span><span class="chip">SQL Server</span><span class="chip">HTML</span><span class="chip">CSS</span></div>
-      </div>
-
-      <div class="proj reveal" data-id="P-04">
-        <div class="pdate">Ago 2016 — Presente</div>
-        <h3>Sistema ERP</h3>
-        <p>Manutenção e evolução dos módulos de compras, financeiro e contabilidade do ERP corporativo, com desenvolvimento contínuo de funcionalidades e integração de dados.</p>
-        <div class="stack"><span class="chip">Delphi</span><span class="chip">SQL Server</span></div>
-      </div>
-
-      <div class="proj reveal" data-id="P-05">
+      <div class="proj reveal" data-id="P-07">
         <div class="pdate">Mar 2024</div>
         <h3>Sistema para Cotação de Preços</h3>
         <p>Ferramenta para envio de cotações a fornecedores e geração de relatórios comparativos de preços, apoiando decisões de compra com dados consolidados.</p>
         <div class="stack"><span class="chip">Delphi</span><span class="chip">PHP</span><span class="chip">JavaScript</span><span class="chip">SQL Server</span></div>
       </div>
 
-      <div class="proj reveal" data-id="P-06">
+      <div class="proj reveal" data-id="P-08">
+        <div class="pdate">Ago 2016 — Presente</div>
+        <h3>Portal do Coordenador</h3>
+        <p>Sistema de solicitações administrativas — compras, passagens, diárias e pagamentos — com emissão de relatórios financeiros e gestão de contas para coordenadores de projeto.</p>
+        <div class="stack"><span class="chip">PHP</span><span class="chip">SQL Server</span><span class="chip">HTML</span><span class="chip">CSS</span></div>
+      </div>
+
+      <div class="proj reveal" data-id="P-09">
+        <div class="pdate">Ago 2016 — Presente</div>
+        <h3>Sistema ERP</h3>
+        <p>Manutenção e evolução dos módulos de compras, financeiro e contabilidade do ERP corporativo, com desenvolvimento contínuo de funcionalidades e integração de dados.</p>
+        <div class="stack"><span class="chip">Delphi</span><span class="chip">SQL Server</span></div>
+      </div>
+
+      <div class="proj reveal" data-id="P-10">
         <div class="pdate">2015 — 2016 · UFSC / DLLE</div>
-        <h3>Sites Proficiência & Cursos Extra</h3>
+        <h3>Sites Proficiência &amp; Cursos Extra</h3>
         <p>Arquitetura e desenvolvimento dos portais de proficiência em idiomas e de gerenciamento de cursos do Departamento de Língua e Literaturas Estrangeiras da UFSC.</p>
         <div class="stack"><span class="chip">PHP</span><span class="chip">Bootstrap</span><span class="chip">JavaScript</span><span class="chip">MySQL</span></div>
       </div>
@@ -596,9 +668,54 @@
   </div>
 </section>
 
+<section id="cursos">
+  <div class="wrap">
+    <div class="eyebrow"><span class="idx">06</span> Desenvolvimento</div>
+    <h2 class="sec-title reveal">Cursos &amp; certificações</h2>
+    <p class="sec-lead reveal">Formação contínua em liderança, LGPD e desenvolvimento.</p>
+    <div class="courses">
+      <div class="course reveal">
+        <div class="c-info">
+          <div class="c-name">Workshop: API de Alta Escala em Laravel</div>
+          <div class="c-inst">Beer and Code</div>
+        </div>
+        <div class="c-meta"><span class="c-hours">6 h</span><span class="c-date">Abr 2026</span></div>
+      </div>
+      <div class="course reveal">
+        <div class="c-info">
+          <div class="c-name">Liderança e Gestão de Pessoas e Equipes</div>
+          <div class="c-inst">Udemy</div>
+        </div>
+        <div class="c-meta"><span class="c-hours">7,5 h</span><span class="c-date">Mar 2026</span></div>
+      </div>
+      <div class="course reveal">
+        <div class="c-info">
+          <div class="c-name">Conceitos Básicos da LGPD V.01/24</div>
+          <div class="c-inst">Somaxi / BeCompliance</div>
+        </div>
+        <div class="c-meta"><span class="c-hours">2 h</span><span class="c-date">Mar 2026</span></div>
+      </div>
+      <div class="course reveal">
+        <div class="c-info">
+          <div class="c-name">TEDx UDESC</div>
+          <div class="c-inst">UDESC</div>
+        </div>
+        <div class="c-meta"><span class="c-hours">3 h</span><span class="c-date">Nov 2020</span></div>
+      </div>
+      <div class="course reveal">
+        <div class="c-info">
+          <div class="c-name">3º Meeting de DPO's de Santa Catarina: cinco erros comuns das abordagens LGPD/GDPR</div>
+          <div class="c-inst">Doutorize Educacional</div>
+        </div>
+        <div class="c-meta"><span class="c-hours">1 h</span><span class="c-date">Jul 2020</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="contato" class="contact">
   <div class="wrap">
-    <div class="eyebrow"><span class="idx">06</span> Contato</div>
+    <div class="eyebrow"><span class="idx">07</span> Contato</div>
     <h2>Vamos construir algo juntos.</h2>
     <p>Aberto a conversas sobre projetos, sistemas e oportunidades. É só chamar.</p>
     <div class="hero-cta">
@@ -678,7 +795,7 @@
   }
 
   // Cascata suave nos grids
-  document.querySelectorAll('.proj-grid, .skill-grid, .edu').forEach(function(grid){
+  document.querySelectorAll('.proj-grid, .skill-grid, .edu, .courses').forEach(function(grid){
     grid.querySelectorAll('.reveal').forEach(function(el,i){
       el.style.transitionDelay = (i * 0.06) + 's';
     });
@@ -704,24 +821,8 @@
   }, {threshold:.6});
   document.querySelectorAll('[data-count]').forEach(function(el){ countObs.observe(el); });
 
-  // Inclinação 3D + brilho nos cards de projeto (apenas com mouse fino)
+  // Brilho que segue o cursor no topo (apenas com mouse fino)
   if(!reduce && window.matchMedia('(hover:hover) and (pointer:fine)').matches){
-    document.querySelectorAll('.proj').forEach(function(card){
-      var g = document.createElement('div');
-      g.className = 'glare';
-      card.appendChild(g);
-      card.addEventListener('mousemove', function(ev){
-        var r = card.getBoundingClientRect();
-        var x = (ev.clientX - r.left) / r.width;
-        var y = (ev.clientY - r.top) / r.height;
-        card.style.transform = 'perspective(900px) rotateY(' + ((x - .5) * 5).toFixed(2) + 'deg) rotateX(' + ((.5 - y) * 5).toFixed(2) + 'deg) translateY(-4px)';
-        g.style.setProperty('--gx', (x * 100) + '%');
-        g.style.setProperty('--gy', (y * 100) + '%');
-      });
-      card.addEventListener('mouseleave', function(){ card.style.transform = ''; });
-    });
-
-    // Brilho que segue o cursor no topo
     var hd = document.querySelector('header');
     if(hd){
       hd.addEventListener('mousemove', function(ev){
@@ -743,95 +844,6 @@
   } else {
     document.querySelectorAll('.schema .row').forEach(function(r){ r.style.opacity = 1; });
   }
-
-  // ===== Fundo animado: rede de nós (diagrama de dados vivo) =====
-  (function(){
-    var canvas = document.createElement('canvas');
-    canvas.id = 'bg-canvas';
-    document.body.insertBefore(canvas, document.body.firstChild);
-    var ctx = canvas.getContext('2d');
-
-    var W, H, dpr, nodes = [], mouse = {x:null, y:null};
-    var GREEN = '99,196,140', AMBER = '240,180,41';
-
-    function size(){
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      W = window.innerWidth; H = window.innerHeight;
-      canvas.width = W * dpr; canvas.height = H * dpr;
-      canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      build();
-    }
-
-    function build(){
-      // densidade proporcional à área, com teto para performance
-      var count = Math.min(72, Math.max(26, Math.round(W * H / 24000)));
-      if(window.innerWidth < 640) count = Math.min(count, 34);
-      nodes = [];
-      for(var i=0;i<count;i++){
-        nodes.push({
-          x: Math.random()*W, y: Math.random()*H,
-          vx: (Math.random()-.5)*0.22, vy: (Math.random()-.5)*0.22,
-          r: Math.random()*1.6 + 1,
-          amber: Math.random() < 0.12
-        });
-      }
-    }
-
-    var LINK = 148; // distância máxima para conectar nós
-
-    function frame(){
-      ctx.clearRect(0,0,W,H);
-      for(var i=0;i<nodes.length;i++){
-        var n = nodes[i];
-        n.x += n.vx; n.y += n.vy;
-        if(n.x < -20) n.x = W+20; if(n.x > W+20) n.x = -20;
-        if(n.y < -20) n.y = H+20; if(n.y > H+20) n.y = -20;
-
-        // conexões entre nós
-        for(var j=i+1;j<nodes.length;j++){
-          var m = nodes[j], dx = n.x-m.x, dy = n.y-m.y, d = Math.hypot(dx,dy);
-          if(d < LINK){
-            var a = (1 - d/LINK) * 0.32;
-            ctx.strokeStyle = 'rgba('+GREEN+','+a.toFixed(3)+')';
-            ctx.lineWidth = 1;
-            ctx.beginPath(); ctx.moveTo(n.x,n.y); ctx.lineTo(m.x,m.y); ctx.stroke();
-          }
-        }
-        // conexão ao cursor
-        if(mouse.x !== null){
-          var mdx = n.x-mouse.x, mdy = n.y-mouse.y, md = Math.hypot(mdx,mdy);
-          if(md < 180){
-            var ma = (1 - md/180) * 0.5;
-            ctx.strokeStyle = 'rgba('+GREEN+','+ma.toFixed(3)+')';
-            ctx.lineWidth = 1;
-            ctx.beginPath(); ctx.moveTo(n.x,n.y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke();
-          }
-        }
-        // o nó
-        ctx.fillStyle = 'rgba('+(n.amber?AMBER:GREEN)+','+(n.amber?0.9:0.7)+')';
-        ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill();
-      }
-    }
-
-    var raf = null, running = false;
-    function loop(){ frame(); raf = requestAnimationFrame(loop); }
-    function start(){ if(!running){ running = true; loop(); } }
-    function stop(){ running = false; if(raf) cancelAnimationFrame(raf); raf = null; }
-
-    window.addEventListener('resize', size);
-    document.addEventListener('visibilitychange', function(){
-      if(document.hidden) stop(); else if(!reduce) start();
-    });
-    if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
-      window.addEventListener('mousemove', function(e){ mouse.x = e.clientX; mouse.y = e.clientY; }, {passive:true});
-      window.addEventListener('mouseout', function(){ mouse.x = null; mouse.y = null; });
-    }
-
-    size();
-    if(reduce){ frame(); }   // um quadro estático, sem animação
-    else{ start(); }
-  })();
 </script>
 </body>
 </html>
