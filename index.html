@@ -374,15 +374,6 @@
   @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(240,180,41,.5)}50%{box-shadow:0 0 12px 3px rgba(240,180,41,.5)}}
   @keyframes pulseGreen{0%,100%{box-shadow:0 0 0 0 rgba(99,196,140,.5)}50%{box-shadow:0 0 12px 3px rgba(99,196,140,.45)}}
 
-  /* ===== brilho que segue o cursor no topo ===== */
-  header{--gx:50%;--gy:32%}
-  header::after{
-    content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
-    background:radial-gradient(340px circle at var(--gx) var(--gy),rgba(99,196,140,.10),transparent 70%);
-    opacity:0;transition:opacity .5s;
-  }
-  header:hover::after{opacity:1}
-
   .stat .n{font-variant-numeric:tabular-nums}
 
   @media(prefers-reduced-motion:reduce){
@@ -392,7 +383,6 @@
     .hero h1 .line > span{transform:none!important}
     .hero .eyebrow,.hero .tag,.hero .hero-cta,.schema{opacity:1!important}
     #progress{display:none}
-    header::after{display:none}
   }
 </style>
 </head>
@@ -821,18 +811,6 @@
   }, {threshold:.6});
   document.querySelectorAll('[data-count]').forEach(function(el){ countObs.observe(el); });
 
-  // Brilho que segue o cursor no topo (apenas com mouse fino)
-  if(!reduce && window.matchMedia('(hover:hover) and (pointer:fine)').matches){
-    var hd = document.querySelector('header');
-    if(hd){
-      hd.addEventListener('mousemove', function(ev){
-        var r = hd.getBoundingClientRect();
-        hd.style.setProperty('--gx', ((ev.clientX - r.left) / r.width * 100) + '%');
-        hd.style.setProperty('--gy', ((ev.clientY - r.top) / r.height * 100) + '%');
-      });
-    }
-  }
-
   // Fade escalonado das linhas do cartão de perfil
   if(!reduce){
     document.querySelectorAll('.schema .row').forEach(function(r){
@@ -844,6 +822,7 @@
   } else {
     document.querySelectorAll('.schema .row').forEach(function(r){ r.style.opacity = 1; });
   }
+
 </script>
 </body>
 </html>
