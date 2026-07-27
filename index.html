@@ -126,20 +126,20 @@
   @media(max-width:680px){.nav-links{display:none}}
 
   .lang-toggle{
-    font-size:1rem;
     background:transparent;border:1px solid var(--line);
     border-radius:20px;padding:4px 6px;cursor:pointer;
-    display:flex;align-items:center;gap:1px;color:var(--muted);
+    display:flex;align-items:center;gap:1px;
     transition:border-color .2s;
-    line-height:1;
+    line-height:0;
   }
   .lang-toggle:hover{border-color:var(--cyan-dim)}
   .lang-opt{
-    padding:4px 6px;border-radius:14px;transition:all .2s;
-    filter:grayscale(1) opacity(.45);
-    display:inline-flex;
+    padding:3px 5px;border-radius:14px;transition:all .2s;
+    filter:grayscale(1) opacity(.4);
+    display:inline-flex;align-items:center;
   }
   .lang-opt.is-active{filter:none;background:var(--line-soft)}
+  .flag-icon{display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.06)}
   .lang-sep{color:var(--muted-2);opacity:.4;font-family:'IBM Plex Mono',monospace;font-size:.7rem;padding:0 1px}
 
   /* ================= HERO ================= */
@@ -419,7 +419,25 @@
       <a href="#contato" data-i18n data-pt="contato" data-en="contact">contato</a>
     </div>
     <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language / Trocar idioma">
-      <span class="lang-opt is-active" data-lang="pt" title="Português">🇧🇷</span><span class="lang-sep">/</span><span class="lang-opt" data-lang="en" title="English">🇺🇸</span>
+      <span class="lang-opt is-active" data-lang="pt" title="Português">
+        <svg class="flag-icon" viewBox="0 0 20 14" width="20" height="14" aria-hidden="true">
+          <rect width="20" height="14" rx="2" fill="#009739"/>
+          <polygon points="10,2.2 17.8,7 10,11.8 2.2,7" fill="#FEDD00"/>
+          <circle cx="10" cy="7" r="3.1" fill="#002776"/>
+        </svg>
+      </span><span class="lang-sep">/</span><span class="lang-opt" data-lang="en" title="English">
+        <svg class="flag-icon" viewBox="0 0 20 14" width="20" height="14" aria-hidden="true">
+          <rect width="20" height="14" rx="2" fill="#fff"/>
+          <clipPath id="usClip"><rect width="20" height="14" rx="2"/></clipPath>
+          <g clip-path="url(#usClip)">
+            <rect y="0" width="20" height="2" fill="#B22234"/>
+            <rect y="4" width="20" height="2" fill="#B22234"/>
+            <rect y="8" width="20" height="2" fill="#B22234"/>
+            <rect y="12" width="20" height="2" fill="#B22234"/>
+            <rect x="0" y="0" width="9" height="8" fill="#3C3B6E"/>
+          </g>
+        </svg>
+      </span>
     </button>
   </div>
 </nav>
