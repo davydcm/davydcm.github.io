@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Davyd Carlos Martins — Analista de Sistemas</title>
-<meta name="description" content="Analista de Sistemas e Supervisor de TI em Florianópolis. Desenvolvimento de sistemas ERP e web com PHP, Laravel, Delphi e SQL Server.">
+<title data-pt="Davyd Carlos Martins — Analista de Sistemas" data-en="Davyd Carlos Martins — Systems Analyst">Davyd Carlos Martins — Analista de Sistemas</title>
+<meta name="description" id="metaDesc" data-pt="Analista de Sistemas e Supervisor de TI em Florianópolis. Desenvolvimento de sistemas ERP e web com PHP, Laravel, Delphi e SQL Server." data-en="Systems Analyst and IT Supervisor in Florianópolis, Brazil. ERP and web systems development with PHP, Laravel, Delphi, and SQL Server." content="Analista de Sistemas e Supervisor de TI em Florianópolis. Desenvolvimento de sistemas ERP e web com PHP, Laravel, Delphi e SQL Server.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -124,6 +124,23 @@
   }
   .nav-links a:hover{color:var(--cyan)}
   @media(max-width:680px){.nav-links{display:none}}
+
+  .lang-toggle{
+    font-size:1rem;
+    background:transparent;border:1px solid var(--line);
+    border-radius:20px;padding:4px 6px;cursor:pointer;
+    display:flex;align-items:center;gap:1px;color:var(--muted);
+    transition:border-color .2s;
+    line-height:1;
+  }
+  .lang-toggle:hover{border-color:var(--cyan-dim)}
+  .lang-opt{
+    padding:4px 6px;border-radius:14px;transition:all .2s;
+    filter:grayscale(1) opacity(.45);
+    display:inline-flex;
+  }
+  .lang-opt.is-active{filter:none;background:var(--line-soft)}
+  .lang-sep{color:var(--muted-2);opacity:.4;font-family:'IBM Plex Mono',monospace;font-size:.7rem;padding:0 1px}
 
   /* ================= HERO ================= */
   header{padding:92px 0 88px;position:relative}
@@ -395,12 +412,15 @@
   <div class="wrap">
     <div class="brand"><span class="dot"></span>Davyd Martins</div>
     <div class="nav-links">
-      <a href="#sobre">sobre</a>
-      <a href="#experiencia">experiência</a>
-      <a href="#projetos">projetos</a>
+      <a href="#sobre" data-i18n data-pt="sobre" data-en="about">sobre</a>
+      <a href="#experiencia" data-i18n data-pt="experiência" data-en="experience">experiência</a>
+      <a href="#projetos" data-i18n data-pt="projetos" data-en="projects">projetos</a>
       <a href="#skills">skills</a>
-      <a href="#contato">contato</a>
+      <a href="#contato" data-i18n data-pt="contato" data-en="contact">contato</a>
     </div>
+    <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language / Trocar idioma">
+      <span class="lang-opt is-active" data-lang="pt" title="Português">🇧🇷</span><span class="lang-sep">/</span><span class="lang-opt" data-lang="en" title="English">🇺🇸</span>
+    </button>
   </div>
 </nav>
 
@@ -408,11 +428,11 @@
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero">
-        <div class="eyebrow"><span class="idx">v.2026</span> Analista de Sistemas</div>
+        <div class="eyebrow" data-i18n data-pt="v.2026 Analista de Sistemas" data-en="v.2026 Systems Analyst"><span class="idx">v.2026</span> Analista de Sistemas</div>
         <h1><span class="line"><span>Davyd Carlos</span></span><span class="line"><span class="accent">Martins</span></span></h1>
-        <p class="tag">Projeto, construo e mantenho <strong>sistemas ERP e web</strong> de ponta a ponta — do levantamento de requisitos à arquitetura de banco de dados e à entrega em produção.</p>
+        <p class="tag" data-i18n data-pt="Projeto, construo e mantenho <strong>sistemas ERP e web</strong> de ponta a ponta — do levantamento de requisitos à arquitetura de banco de dados e à entrega em produção." data-en="I design, build, and maintain <strong>ERP and web systems</strong> end to end — from requirements gathering to database architecture and production delivery.">Projeto, construo e mantenho <strong>sistemas ERP e web</strong> de ponta a ponta — do levantamento de requisitos à arquitetura de banco de dados e à entrega em produção.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#projetos">Ver projetos →</a>
+          <a class="btn btn-primary" href="#projetos" data-i18n data-pt="Ver projetos →" data-en="View projects →">Ver projetos →</a>
           <a class="btn btn-ghost" href="https://www.linkedin.com/in/davydmartins/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
@@ -420,18 +440,18 @@
       <div class="schema" aria-hidden="true">
         <div class="schema-head">
           <span class="d"></span><span class="d"></span><span class="d on"></span>
-          <span style="margin-left:auto">perfil</span>
+          <span style="margin-left:auto" data-i18n data-pt="perfil" data-en="profile">perfil</span>
         </div>
         <div class="schema-body">
           <div class="avatar-ring">
             <img src="https://avatars.githubusercontent.com/u/13577085?v=4" alt="Foto de Davyd Carlos Martins" loading="eager" referrerpolicy="no-referrer" width="128" height="128">
           </div>
-          <div class="row" style="animation-delay:.2s"><span class="k">papel</span><span class="v">Analista de Sistemas</span></div>
-          <div class="row" style="animation-delay:.35s"><span class="k">cargo</span><span class="v">Supervisor de TI</span></div>
-          <div class="row" style="animation-delay:.5s"><span class="k">local</span><span class="v">Florianópolis, BR</span></div>
+          <div class="row" style="animation-delay:.2s"><span class="k" data-i18n data-pt="papel" data-en="role">papel</span><span class="v" data-i18n data-pt="Analista de Sistemas" data-en="Systems Analyst">Analista de Sistemas</span></div>
+          <div class="row" style="animation-delay:.35s"><span class="k" data-i18n data-pt="cargo" data-en="position">cargo</span><span class="v" data-i18n data-pt="Supervisor de TI" data-en="IT Supervisor">Supervisor de TI</span></div>
+          <div class="row" style="animation-delay:.5s"><span class="k" data-i18n data-pt="local" data-en="location">local</span><span class="v">Florianópolis, BR</span></div>
           <div class="row" style="animation-delay:.65s"><span class="k">stack</span><span class="v">PHP · Laravel · Delphi</span></div>
           <div class="row" style="animation-delay:.8s"><span class="k">db</span><span class="v">SQL Server · MySQL</span></div>
-          <div class="row" style="animation-delay:.95s"><span class="k">status</span><span class="v"><span class="hl">● aberto a oportunidades</span></span></div>
+          <div class="row" style="animation-delay:.95s"><span class="k">status</span><span class="v"><span class="hl" data-i18n data-pt="● aberto a oportunidades" data-en="● open to opportunities">● aberto a oportunidades</span></span></div>
         </div>
       </div>
     </div>
@@ -440,18 +460,18 @@
 
 <section id="sobre">
   <div class="wrap">
-    <div class="eyebrow"><span class="idx">01</span> Sobre</div>
+    <div class="eyebrow" data-i18n data-pt="01 Sobre" data-en="01 About"><span class="idx">01</span> Sobre</div>
     <div class="about-grid">
       <div class="about-text reveal">
-        <h2 class="sec-title">Da regra de negócio à linha de código.</h2>
-        <p>Sou desenvolvedor e analista de sistemas com experiência sólida em traduzir necessidades de negócio em soluções que funcionam no dia a dia. Atuo desde o levantamento de requisitos com os usuários até a arquitetura, o desenvolvimento e a manutenção dos sistemas em produção.</p>
-        <p>Hoje sou <strong>Supervisor de TI</strong> e <strong>Analista de Sistemas</strong> na Fundação de Amparo à Pesquisa e Extensão Universitária, onde lidero o desenvolvimento de sistemas ERP e web e administro os bancos de dados. Também integro o <strong>Comitê de LGPD</strong> da instituição.</p>
-        <p>Antes disso, atuei por seis anos no Departamento de Língua e Literatura Estrangeira da UFSC, criando soluções como um sistema de agendamento de provas de proficiência e a automação de inscrições para eventos acadêmicos.</p>
+        <h2 class="sec-title" data-i18n data-pt="Da regra de negócio à linha de código." data-en="From business rule to line of code.">Da regra de negócio à linha de código.</h2>
+        <p data-i18n data-pt="Profissional de TI com mais de 14 anos de experiência em desenvolvimento de sistemas desktop, web e banco de dados, atualmente atuando como <strong>Supervisor de TI</strong> e <strong>Analista de Sistemas</strong> na Fundação de Amparo à Pesquisa e Extensão Universitária, onde lidero a equipe de Tecnologia da Informação com foco em sistemas ERP." data-en="IT professional with 14+ years of experience in desktop, web, and database systems development, currently serving as <strong>IT Supervisor</strong> and <strong>Systems Analyst</strong> at the Foundation for Research and University Extension Support, where I lead the IT team with a focus on ERP systems.">Profissional de TI com mais de 14 anos de experiência em desenvolvimento de sistemas desktop, web e banco de dados, atualmente atuando como <strong>Supervisor de TI</strong> e <strong>Analista de Sistemas</strong> na Fundação de Amparo à Pesquisa e Extensão Universitária, onde lidero a equipe de Tecnologia da Informação com foco em sistemas ERP.</p>
+        <p data-i18n data-pt="Participei do ciclo completo de desenvolvimento de mais de 9 sistemas em produção — do levantamento de requisitos à arquitetura, implementação e suporte técnico — com domínio sólido em PHP, Laravel, Delphi, SQL Server e MySQL, incluindo modelagem de banco de dados, procedures e functions." data-en="I've been involved in the complete development cycle of 9+ production systems — from requirements gathering to architecture, implementation, and technical support — with solid expertise in PHP, Laravel, Delphi, SQL Server, and MySQL, including database modeling, stored procedures, and functions.">Participei do ciclo completo de desenvolvimento de mais de 9 sistemas em produção — do levantamento de requisitos à arquitetura, implementação e suporte técnico — com domínio sólido em PHP, Laravel, Delphi, SQL Server e MySQL, incluindo modelagem de banco de dados, procedures e functions.</p>
+        <p data-i18n data-pt="Como membro do <strong>Comitê de LGPD</strong> da fundação, contribuo com governança de dados, mapeamento de informações pessoais e adequação dos sistemas às normas de privacidade — uma área cada vez mais estratégica para as empresas. Tenho formação em Gestão da Tecnologia da Informação e pós-graduação em Ciência de Dados e Big Data Analytics." data-en="As a member of the foundation's <strong>LGPD Committee</strong> (Brazil's data protection law), I contribute to data governance, personal data mapping, and system compliance with privacy regulations — an increasingly strategic area for businesses. I hold a degree in Information Technology Management and a postgraduate degree in Data Science and Big Data Analytics.">Como membro do <strong>Comitê de LGPD</strong> da fundação, contribuo com governança de dados, mapeamento de informações pessoais e adequação dos sistemas às normas de privacidade — uma área cada vez mais estratégica para as empresas. Tenho formação em Gestão da Tecnologia da Informação e pós-graduação em Ciência de Dados e Big Data Analytics.</p>
       </div>
       <div class="stat-stack reveal">
-        <div class="stat"><div class="n" data-count="10" data-suffix="+">0+</div><div class="l">anos desenvolvendo software</div></div>
-        <div class="stat"><div class="n">ERP</div><div class="l">sistemas administrados</div></div>
-        <div class="stat"><div class="n">LGPD</div><div class="l">membro do comitê</div></div>
+        <div class="stat"><div class="n" data-count="10" data-suffix="+">0+</div><div class="l" data-i18n data-pt="anos desenvolvendo software" data-en="years developing software">anos desenvolvendo software</div></div>
+        <div class="stat"><div class="n">ERP</div><div class="l" data-i18n data-pt="sistemas administrados" data-en="systems maintained">sistemas administrados</div></div>
+        <div class="stat"><div class="n">LGPD</div><div class="l" data-i18n data-pt="membro do comitê" data-en="committee member">membro do comitê</div></div>
       </div>
     </div>
   </div>
@@ -459,56 +479,56 @@
 
 <section id="experiencia">
   <div class="wrap">
-    <div class="eyebrow"><span class="idx">02</span> Trajetória</div>
-    <h2 class="sec-title reveal">Experiência profissional</h2>
-    <p class="sec-lead reveal">Uma progressão de desenvolvedor a analista e supervisor, sempre com a mão no código e nos dados.</p>
+    <div class="eyebrow" data-i18n data-pt="02 Trajetória" data-en="02 Journey"><span class="idx">02</span> Trajetória</div>
+    <h2 class="sec-title reveal" data-i18n data-pt="Experiência profissional" data-en="Professional experience">Experiência profissional</h2>
+    <p class="sec-lead reveal" data-i18n data-pt="Uma progressão de desenvolvedor a analista e supervisor, sempre com a mão no código e nos dados." data-en="A progression from developer to analyst and supervisor, always hands-on with code and data.">Uma progressão de desenvolvedor a analista e supervisor, sempre com a mão no código e nos dados.</p>
 
     <div class="timeline">
       <div class="job active reveal">
-        <div class="when">Fev 2025 — Presente</div>
-        <h3>Membro do Comitê de LGPD</h3>
+        <div class="when" data-i18n data-pt="Fev 2025 — Presente" data-en="Feb 2025 — Present">Fev 2025 — Presente</div>
+        <h3 data-i18n data-pt="Membro do Comitê de LGPD" data-en="LGPD Committee Member">Membro do Comitê de LGPD</h3>
         <div class="org">Fundação de Amparo à Pesquisa e Extensão Universitária · Florianópolis, SC</div>
         <ul>
-          <li>Participação nas reuniões do comitê e definição de diretrizes.</li>
-          <li>Tratamento de dados pessoais e apoio à tomada de decisões.</li>
+          <li data-i18n data-pt="Participação nas reuniões do comitê e definição de diretrizes." data-en="Participation in committee meetings and guideline definition.">Participação nas reuniões do comitê e definição de diretrizes.</li>
+          <li data-i18n data-pt="Tratamento de dados pessoais e apoio à tomada de decisões." data-en="Personal data handling and decision-making support.">Tratamento de dados pessoais e apoio à tomada de decisões.</li>
         </ul>
       </div>
       <div class="job active reveal">
-        <div class="when">Nov 2024 — Presente</div>
-        <h3>Supervisor de TI</h3>
+        <div class="when" data-i18n data-pt="Nov 2024 — Presente" data-en="Nov 2024 — Present">Nov 2024 — Presente</div>
+        <h3 data-i18n data-pt="Supervisor de TI" data-en="IT Supervisor">Supervisor de TI</h3>
         <div class="org">Fundação de Amparo à Pesquisa e Extensão Universitária · Florianópolis, SC</div>
         <ul>
-          <li>Liderança e coordenação das atividades da equipe de Tecnologia da Informação.</li>
-          <li>Levantamento de requisitos junto aos usuários e planejamento de desenvolvimento.</li>
+          <li data-i18n data-pt="Liderança e coordenação das atividades da equipe de Tecnologia da Informação." data-en="Leadership and coordination of the IT team's activities.">Liderança e coordenação das atividades da equipe de Tecnologia da Informação.</li>
+          <li data-i18n data-pt="Levantamento de requisitos junto aos usuários e planejamento de desenvolvimento." data-en="Requirements gathering with users and development planning.">Levantamento de requisitos junto aos usuários e planejamento de desenvolvimento.</li>
         </ul>
       </div>
       <div class="job active reveal">
-        <div class="when">Jan 2023 — Presente</div>
-        <h3>Analista de Sistemas</h3>
+        <div class="when" data-i18n data-pt="Jan 2023 — Presente" data-en="Jan 2023 — Present">Jan 2023 — Presente</div>
+        <h3 data-i18n data-pt="Analista de Sistemas" data-en="Systems Analyst">Analista de Sistemas</h3>
         <div class="org">Fundação de Amparo à Pesquisa e Extensão Universitária · Florianópolis, SC</div>
         <ul>
-          <li>Desenvolvimento de novas funcionalidades e relatórios para o sistema ERP.</li>
-          <li>Implementação de novas tecnologias e manutenção dos sistemas web.</li>
-          <li>Administração de banco de dados SQL Server, incluindo procedures e funções.</li>
+          <li data-i18n data-pt="Desenvolvimento de novas funcionalidades e relatórios para o sistema ERP." data-en="Development of new features and reports for the ERP system.">Desenvolvimento de novas funcionalidades e relatórios para o sistema ERP.</li>
+          <li data-i18n data-pt="Implementação de novas tecnologias e manutenção dos sistemas web." data-en="Implementation of new technologies and maintenance of web systems.">Implementação de novas tecnologias e manutenção dos sistemas web.</li>
+          <li data-i18n data-pt="Administração de banco de dados SQL Server, incluindo procedures e funções." data-en="SQL Server database administration, including stored procedures and functions.">Administração de banco de dados SQL Server, incluindo procedures e funções.</li>
         </ul>
       </div>
       <div class="job reveal">
-        <div class="when">Ago 2016 — Jan 2023</div>
-        <h3>Desenvolvedor de Software</h3>
+        <div class="when" data-i18n data-pt="Ago 2016 — Jan 2023" data-en="Aug 2016 — Jan 2023">Ago 2016 — Jan 2023</div>
+        <h3 data-i18n data-pt="Desenvolvedor de Software" data-en="Software Developer">Desenvolvedor de Software</h3>
         <div class="org">Fundação de Amparo à Pesquisa e Extensão Universitária · Florianópolis, SC</div>
         <ul>
-          <li>Desenvolvimento de funcionalidades no sistema interno em Delphi.</li>
-          <li>Relatórios personalizados e manutenção de sistemas web com PHP e JavaScript.</li>
-          <li>Gestão e manutenção do banco de dados SQL Server.</li>
+          <li data-i18n data-pt="Desenvolvimento de funcionalidades no sistema interno em Delphi." data-en="Development of features in the internal Delphi-based system.">Desenvolvimento de funcionalidades no sistema interno em Delphi.</li>
+          <li data-i18n data-pt="Relatórios personalizados e manutenção de sistemas web com PHP e JavaScript." data-en="Custom reports and maintenance of web systems with PHP and JavaScript.">Relatórios personalizados e manutenção de sistemas web com PHP e JavaScript.</li>
+          <li data-i18n data-pt="Gestão e manutenção do banco de dados SQL Server." data-en="Management and maintenance of the SQL Server database.">Gestão e manutenção do banco de dados SQL Server.</li>
         </ul>
       </div>
       <div class="job reveal">
-        <div class="when">6 anos</div>
-        <h3>Desenvolvedor</h3>
+        <div class="when" data-i18n data-pt="6 anos" data-en="6 years">6 anos</div>
+        <h3 data-i18n data-pt="Desenvolvedor" data-en="Developer">Desenvolvedor</h3>
         <div class="org">Departamento de Língua e Literatura Estrangeira — UFSC · Florianópolis, SC</div>
         <ul>
-          <li>Desenvolvimento e manutenção de sistemas e sites do departamento.</li>
-          <li>Sistema de agendamento de provas e automação de inscrições para eventos.</li>
+          <li data-i18n data-pt="Desenvolvimento e manutenção de sistemas e sites do departamento." data-en="Development and maintenance of the department's systems and websites.">Desenvolvimento e manutenção de sistemas e sites do departamento.</li>
+          <li data-i18n data-pt="Sistema de agendamento de provas e automação de inscrições para eventos." data-en="Exam scheduling system and automated event registration.">Sistema de agendamento de provas e automação de inscrições para eventos.</li>
         </ul>
       </div>
     </div>
@@ -517,78 +537,78 @@
 
 <section id="projetos">
   <div class="wrap">
-    <div class="eyebrow"><span class="idx">03</span> Portfólio</div>
-    <h2 class="sec-title reveal">Projetos &amp; iniciativas</h2>
-    <p class="sec-lead reveal">Projetos que liderei, analisei e desenvolvi — da definição de requisitos e documentação à arquitetura de banco de dados e à entrega em produção.</p>
+    <div class="eyebrow" data-i18n data-pt="03 Portfólio" data-en="03 Portfolio"><span class="idx">03</span> Portfólio</div>
+    <h2 class="sec-title reveal" data-i18n data-pt="Projetos &amp; iniciativas" data-en="Projects &amp; initiatives">Projetos &amp; iniciativas</h2>
+    <p class="sec-lead reveal" data-i18n data-pt="Projetos que liderei, analisei e desenvolvi — da definição de requisitos e documentação à arquitetura de banco de dados e à entrega em produção." data-en="Projects I led, analyzed, and developed — from requirements definition and documentation to database architecture and production delivery.">Projetos que liderei, analisei e desenvolvi — da definição de requisitos e documentação à arquitetura de banco de dados e à entrega em produção.</p>
 
     <div class="proj-grid">
       <div class="proj reveal" data-id="P-01">
-        <div class="pdate">Jan 2026 — Presente</div>
-        <h3>Portal do Fornecedor</h3>
-        <p>Condução da análise de um novo portal voltado aos fornecedores: levantamento de requisitos, elaboração da documentação, acompanhamento do desenvolvimento, code reviews e apoio técnico à equipe.</p>
-        <div class="stack"><span class="chip">Requisitos</span><span class="chip">Documentação</span><span class="chip">Code review</span><span class="chip">Liderança técnica</span></div>
+        <div class="pdate" data-i18n data-pt="Jan 2026 — Presente" data-en="Jan 2026 — Present">Jan 2026 — Presente</div>
+        <h3 data-i18n data-pt="Portal do Fornecedor" data-en="Vendor Portal">Portal do Fornecedor</h3>
+        <p data-i18n data-pt="Condução da análise de um novo portal voltado aos fornecedores: levantamento de requisitos, elaboração da documentação, acompanhamento do desenvolvimento, code reviews e apoio técnico à equipe." data-en="Led the analysis of a new vendor-facing portal: requirements gathering, documentation, development follow-up, code reviews, and technical support to the team.">Condução da análise de um novo portal voltado aos fornecedores: levantamento de requisitos, elaboração da documentação, acompanhamento do desenvolvimento, code reviews e apoio técnico à equipe.</p>
+        <div class="stack"><span class="chip" data-i18n data-pt="Requisitos" data-en="Requirements">Requisitos</span><span class="chip" data-i18n data-pt="Documentação" data-en="Documentation">Documentação</span><span class="chip">Code review</span><span class="chip" data-i18n data-pt="Liderança técnica" data-en="Technical leadership">Liderança técnica</span></div>
       </div>
 
       <div class="proj reveal" data-id="P-02">
-        <div class="pdate">Mai 2026 — Presente</div>
-        <h3>Portal do Colaborador</h3>
-        <p>Análise e documentação de um portal para colaboradores, do levantamento de requisitos ao acompanhamento das entregas e revisão de código, dando suporte constante aos desenvolvedores.</p>
-        <div class="stack"><span class="chip">Requisitos</span><span class="chip">Documentação</span><span class="chip">Code review</span></div>
+        <div class="pdate" data-i18n data-pt="Mai 2026 — Presente" data-en="May 2026 — Present">Mai 2026 — Presente</div>
+        <h3 data-i18n data-pt="Portal do Colaborador" data-en="Employee Portal">Portal do Colaborador</h3>
+        <p data-i18n data-pt="Análise e documentação de um portal para colaboradores, do levantamento de requisitos ao acompanhamento das entregas e revisão de código, dando suporte constante aos desenvolvedores." data-en="Analysis and documentation of an employee portal, from requirements gathering to delivery follow-up and code review, providing ongoing support to developers.">Análise e documentação de um portal para colaboradores, do levantamento de requisitos ao acompanhamento das entregas e revisão de código, dando suporte constante aos desenvolvedores.</p>
+        <div class="stack"><span class="chip" data-i18n data-pt="Requisitos" data-en="Requirements">Requisitos</span><span class="chip" data-i18n data-pt="Documentação" data-en="Documentation">Documentação</span><span class="chip">Code review</span></div>
       </div>
 
       <div class="proj reveal" data-id="P-03">
-        <div class="pdate">Jan 2025 — Presente</div>
-        <h3>Liderança no desenvolvimento de projetos</h3>
-        <p>Liderança técnica no desenvolvimento de projetos: análise de requisitos, documentação, acompanhamento das entregas, code reviews e apoio contínuo à equipe de desenvolvimento.</p>
-        <div class="stack"><span class="chip">Liderança</span><span class="chip">Análise de requisitos</span><span class="chip">Code review</span></div>
+        <div class="pdate" data-i18n data-pt="Jan 2025 — Presente" data-en="Jan 2025 — Present">Jan 2025 — Presente</div>
+        <h3 data-i18n data-pt="Liderança no desenvolvimento de projetos" data-en="Technical leadership in project development">Liderança no desenvolvimento de projetos</h3>
+        <p data-i18n data-pt="Liderança técnica no desenvolvimento de projetos: análise de requisitos, documentação, acompanhamento das entregas, code reviews e apoio contínuo à equipe de desenvolvimento." data-en="Technical leadership in project development: requirements analysis, documentation, delivery follow-up, code reviews, and ongoing support to the development team.">Liderança técnica no desenvolvimento de projetos: análise de requisitos, documentação, acompanhamento das entregas, code reviews e apoio contínuo à equipe de desenvolvimento.</p>
+        <div class="stack"><span class="chip" data-i18n data-pt="Liderança" data-en="Leadership">Liderança</span><span class="chip" data-i18n data-pt="Análise de requisitos" data-en="Requirements analysis">Análise de requisitos</span><span class="chip">Code review</span></div>
       </div>
 
       <div class="proj reveal" data-id="P-04">
-        <div class="pdate">Jan 2025 — Presente</div>
-        <h3>Criação de novos projetos</h3>
-        <p>Iniciativa na concepção de novos sistemas: reuniões com os setores para entender suas dores, levantamento de requisitos e elaboração da documentação que dá origem aos projetos.</p>
-        <div class="stack"><span class="chip">Iniciativa</span><span class="chip">Requisitos</span><span class="chip">Documentação</span></div>
+        <div class="pdate" data-i18n data-pt="Jan 2025 — Presente" data-en="Jan 2025 — Present">Jan 2025 — Presente</div>
+        <h3 data-i18n data-pt="Criação de novos projetos" data-en="New project inception">Criação de novos projetos</h3>
+        <p data-i18n data-pt="Iniciativa na concepção de novos sistemas: reuniões com os setores para entender suas dores, levantamento de requisitos e elaboração da documentação que dá origem aos projetos." data-en="Initiative in the conception of new systems: meetings with departments to understand their pain points, requirements gathering, and documentation that gives rise to new projects.">Iniciativa na concepção de novos sistemas: reuniões com os setores para entender suas dores, levantamento de requisitos e elaboração da documentação que dá origem aos projetos.</p>
+        <div class="stack"><span class="chip" data-i18n data-pt="Iniciativa" data-en="Initiative">Iniciativa</span><span class="chip" data-i18n data-pt="Requisitos" data-en="Requirements">Requisitos</span><span class="chip" data-i18n data-pt="Documentação" data-en="Documentation">Documentação</span></div>
       </div>
 
       <div class="proj reveal" data-id="P-05">
-        <div class="pdate">Mai 2024 — Presente</div>
-        <h3>Sistema Administrativo de Eventos</h3>
-        <p>Plataforma completa para abertura e gestão de eventos, com inscrições, aprovações técnicas e controle de pagamentos (Boleto, PIX, Cartão e GRU). Arquitetura, banco de dados e desenvolvimento de ponta a ponta, com relatórios sob demanda.</p>
+        <div class="pdate" data-i18n data-pt="Mai 2024 — Presente" data-en="May 2024 — Present">Mai 2024 — Presente</div>
+        <h3 data-i18n data-pt="Sistema Administrativo de Eventos" data-en="Event Management System">Sistema Administrativo de Eventos</h3>
+        <p data-i18n data-pt="Plataforma completa para abertura e gestão de eventos, com inscrições, aprovações técnicas e controle de pagamentos (Boleto, PIX, Cartão e GRU). Arquitetura, banco de dados e desenvolvimento de ponta a ponta, com relatórios sob demanda." data-en="A complete platform for opening and managing events, with registrations, technical approvals, and payment tracking (Boleto, PIX, Card, and GRU). End-to-end architecture, database, and development, with on-demand reporting.">Plataforma completa para abertura e gestão de eventos, com inscrições, aprovações técnicas e controle de pagamentos (Boleto, PIX, Cartão e GRU). Arquitetura, banco de dados e desenvolvimento de ponta a ponta, com relatórios sob demanda.</p>
         <div class="stack"><span class="chip">PHP 8</span><span class="chip">Laravel 11</span><span class="chip">MySQL</span><span class="chip">JavaScript</span><span class="chip">CSS</span></div>
       </div>
 
       <div class="proj reveal" data-id="P-06">
-        <div class="pdate">Fev 2024 — Presente</div>
-        <h3>Sistema de Reserva de Salas</h3>
-        <p>Solução em dois módulos: um portal cliente para verificar disponibilidade e solicitar reservas, e um módulo administrador para aprovações e envio automático de e-mails com boleto para pagamento.</p>
+        <div class="pdate" data-i18n data-pt="Fev 2024 — Presente" data-en="Feb 2024 — Present">Fev 2024 — Presente</div>
+        <h3 data-i18n data-pt="Sistema de Reserva de Salas" data-en="Room Booking System">Sistema de Reserva de Salas</h3>
+        <p data-i18n data-pt="Solução em dois módulos: um portal cliente para verificar disponibilidade e solicitar reservas, e um módulo administrador para aprovações e envio automático de e-mails com boleto para pagamento." data-en="A two-module solution: a client portal to check availability and request bookings, and an admin module for approvals and automatic emailing of payment slips.">Solução em dois módulos: um portal cliente para verificar disponibilidade e solicitar reservas, e um módulo administrador para aprovações e envio automático de e-mails com boleto para pagamento.</p>
         <div class="stack"><span class="chip">PHP</span><span class="chip">Delphi</span><span class="chip">JavaScript</span><span class="chip">SQL Server</span></div>
       </div>
 
       <div class="proj reveal" data-id="P-07">
-        <div class="pdate">Mar 2024</div>
-        <h3>Sistema para Cotação de Preços</h3>
-        <p>Ferramenta para envio de cotações a fornecedores e geração de relatórios comparativos de preços, apoiando decisões de compra com dados consolidados.</p>
+        <div class="pdate" data-i18n data-pt="Mar 2024" data-en="Mar 2024">Mar 2024</div>
+        <h3 data-i18n data-pt="Sistema para Cotação de Preços" data-en="Price Quotation System">Sistema para Cotação de Preços</h3>
+        <p data-i18n data-pt="Ferramenta para envio de cotações a fornecedores e geração de relatórios comparativos de preços, apoiando decisões de compra com dados consolidados." data-en="A tool for sending quote requests to vendors and generating comparative price reports, supporting purchasing decisions with consolidated data.">Ferramenta para envio de cotações a fornecedores e geração de relatórios comparativos de preços, apoiando decisões de compra com dados consolidados.</p>
         <div class="stack"><span class="chip">Delphi</span><span class="chip">PHP</span><span class="chip">JavaScript</span><span class="chip">SQL Server</span></div>
       </div>
 
       <div class="proj reveal" data-id="P-08">
-        <div class="pdate">Ago 2016 — Presente</div>
-        <h3>Portal do Coordenador</h3>
-        <p>Sistema de solicitações administrativas — compras, passagens, diárias e pagamentos — com emissão de relatórios financeiros e gestão de contas para coordenadores de projeto.</p>
+        <div class="pdate" data-i18n data-pt="Ago 2016 — Presente" data-en="Aug 2016 — Present">Ago 2016 — Presente</div>
+        <h3 data-i18n data-pt="Portal do Coordenador" data-en="Coordinator Portal">Portal do Coordenador</h3>
+        <p data-i18n data-pt="Sistema de solicitações administrativas — compras, passagens, diárias e pagamentos — com emissão de relatórios financeiros e gestão de contas para coordenadores de projeto." data-en="An administrative request system — purchases, travel, per diems, and payments — with financial reporting and account management for project coordinators.">Sistema de solicitações administrativas — compras, passagens, diárias e pagamentos — com emissão de relatórios financeiros e gestão de contas para coordenadores de projeto.</p>
         <div class="stack"><span class="chip">PHP</span><span class="chip">SQL Server</span><span class="chip">HTML</span><span class="chip">CSS</span></div>
       </div>
 
       <div class="proj reveal" data-id="P-09">
-        <div class="pdate">Ago 2016 — Presente</div>
-        <h3>Sistema ERP</h3>
-        <p>Manutenção e evolução dos módulos de compras, financeiro e contabilidade do ERP corporativo, com desenvolvimento contínuo de funcionalidades e integração de dados.</p>
+        <div class="pdate" data-i18n data-pt="Ago 2016 — Presente" data-en="Aug 2016 — Present">Ago 2016 — Presente</div>
+        <h3 data-i18n data-pt="Sistema ERP" data-en="ERP System">Sistema ERP</h3>
+        <p data-i18n data-pt="Manutenção e evolução dos módulos de compras, financeiro e contabilidade do ERP corporativo, com desenvolvimento contínuo de funcionalidades e integração de dados." data-en="Maintenance and enhancement of the procurement, finance, and accounting modules of the corporate ERP, with ongoing feature development and data integration.">Manutenção e evolução dos módulos de compras, financeiro e contabilidade do ERP corporativo, com desenvolvimento contínuo de funcionalidades e integração de dados.</p>
         <div class="stack"><span class="chip">Delphi</span><span class="chip">SQL Server</span></div>
       </div>
 
       <div class="proj reveal" data-id="P-10">
-        <div class="pdate">2015 — 2016 · UFSC / DLLE</div>
-        <h3>Sites Proficiência &amp; Cursos Extra</h3>
-        <p>Arquitetura e desenvolvimento dos portais de proficiência em idiomas e de gerenciamento de cursos do Departamento de Língua e Literaturas Estrangeiras da UFSC.</p>
+        <div class="pdate" data-i18n data-pt="2015 — 2016 · UFSC / DLLE" data-en="2015 — 2016 · UFSC / DLLE">2015 — 2016 · UFSC / DLLE</div>
+        <h3 data-i18n data-pt="Sites Proficiência &amp; Cursos Extra" data-en="Proficiency &amp; Extra Courses Sites">Sites Proficiência &amp; Cursos Extra</h3>
+        <p data-i18n data-pt="Arquitetura e desenvolvimento dos portais de proficiência em idiomas e de gerenciamento de cursos do Departamento de Língua e Literaturas Estrangeiras da UFSC." data-en="Architecture and development of the language proficiency and course management portals for UFSC's Department of Foreign Languages and Literatures.">Arquitetura e desenvolvimento dos portais de proficiência em idiomas e de gerenciamento de cursos do Departamento de Língua e Literaturas Estrangeiras da UFSC.</p>
         <div class="stack"><span class="chip">PHP</span><span class="chip">Bootstrap</span><span class="chip">JavaScript</span><span class="chip">MySQL</span></div>
       </div>
     </div>
@@ -597,13 +617,13 @@
 
 <section id="skills">
   <div class="wrap">
-    <div class="eyebrow"><span class="idx">04</span> Competências</div>
-    <h2 class="sec-title reveal">Stack técnico</h2>
-    <p class="sec-lead reveal">As ferramentas que uso para transformar requisitos em sistemas confiáveis.</p>
+    <div class="eyebrow" data-i18n data-pt="04 Competências" data-en="04 Skills"><span class="idx">04</span> Competências</div>
+    <h2 class="sec-title reveal" data-i18n data-pt="Stack técnico" data-en="Technical stack">Stack técnico</h2>
+    <p class="sec-lead reveal" data-i18n data-pt="As ferramentas que uso para transformar requisitos em sistemas confiáveis." data-en="The tools I use to turn requirements into reliable systems.">As ferramentas que uso para transformar requisitos em sistemas confiáveis.</p>
 
     <div class="skill-grid">
       <div class="skill-card reveal">
-        <h4>Linguagens</h4>
+        <h4 data-i18n data-pt="Linguagens" data-en="Languages">Linguagens</h4>
         <div class="items"><span class="chip">PHP</span><span class="chip">Delphi</span><span class="chip">Java</span><span class="chip">JavaScript</span></div>
       </div>
       <div class="skill-card reveal">
@@ -611,47 +631,47 @@
         <div class="items"><span class="chip">Laravel</span><span class="chip">Bootstrap</span><span class="chip">CSS</span></div>
       </div>
       <div class="skill-card reveal">
-        <h4>Banco de Dados</h4>
+        <h4 data-i18n data-pt="Banco de Dados" data-en="Databases">Banco de Dados</h4>
         <div class="items"><span class="chip">SQL Server</span><span class="chip">MySQL</span><span class="chip">Procedures</span></div>
       </div>
       <div class="skill-card reveal">
-        <h4>Sistemas</h4>
-        <div class="items"><span class="chip">ERP</span><span class="chip">Análise de Sistemas</span><span class="chip">Relatórios</span></div>
+        <h4 data-i18n data-pt="Sistemas" data-en="Systems">Sistemas</h4>
+        <div class="items"><span class="chip">ERP</span><span class="chip" data-i18n data-pt="Análise de Sistemas" data-en="Systems Analysis">Análise de Sistemas</span><span class="chip" data-i18n data-pt="Relatórios" data-en="Reporting">Relatórios</span></div>
       </div>
       <div class="skill-card reveal">
-        <h4>Processos</h4>
-        <div class="items"><span class="chip">Requisitos</span><span class="chip">LGPD</span><span class="chip">Suporte Técnico</span></div>
+        <h4 data-i18n data-pt="Processos" data-en="Processes">Processos</h4>
+        <div class="items"><span class="chip" data-i18n data-pt="Requisitos" data-en="Requirements">Requisitos</span><span class="chip">LGPD</span><span class="chip" data-i18n data-pt="Suporte Técnico" data-en="Technical Support">Suporte Técnico</span></div>
       </div>
       <div class="skill-card reveal">
-        <h4>Dados</h4>
-        <div class="items"><span class="chip">Big Data Analytics</span><span class="chip">Ciência de Dados</span></div>
+        <h4 data-i18n data-pt="Dados" data-en="Data">Dados</h4>
+        <div class="items"><span class="chip">Big Data Analytics</span><span class="chip" data-i18n data-pt="Ciência de Dados" data-en="Data Science">Ciência de Dados</span></div>
       </div>
     </div>
 
     <div class="soft-row reveal">
-      <span class="soft">criatividade</span>
-      <span class="soft">comunicação</span>
-      <span class="soft">adaptabilidade</span>
-      <span class="soft">resiliência</span>
-      <span class="soft">empatia</span>
+      <span class="soft" data-i18n data-pt="criatividade" data-en="creativity">criatividade</span>
+      <span class="soft" data-i18n data-pt="comunicação" data-en="communication">comunicação</span>
+      <span class="soft" data-i18n data-pt="adaptabilidade" data-en="adaptability">adaptabilidade</span>
+      <span class="soft" data-i18n data-pt="resiliência" data-en="resilience">resiliência</span>
+      <span class="soft" data-i18n data-pt="empatia" data-en="empathy">empatia</span>
     </div>
   </div>
 </section>
 
 <section id="formacao">
   <div class="wrap">
-    <div class="eyebrow"><span class="idx">05</span> Formação</div>
-    <h2 class="sec-title reveal">Formação acadêmica</h2>
-    <p class="sec-lead reveal">Base em gestão de TI, com especialização em dados.</p>
+    <div class="eyebrow" data-i18n data-pt="05 Formação" data-en="05 Education"><span class="idx">05</span> Formação</div>
+    <h2 class="sec-title reveal" data-i18n data-pt="Formação acadêmica" data-en="Academic background">Formação acadêmica</h2>
+    <p class="sec-lead reveal" data-i18n data-pt="Base em gestão de TI, com especialização em dados." data-en="A foundation in IT management, with a specialization in data.">Base em gestão de TI, com especialização em dados.</p>
     <div class="edu">
       <div class="edu-card reveal">
         <div class="yr">2018 — 2019</div>
-        <h3>Pós-Graduação em Ciência de Dados e Big Data Analytics</h3>
+        <h3 data-i18n data-pt="Pós-Graduação em Ciência de Dados e Big Data Analytics" data-en="Postgraduate Degree in Data Science and Big Data Analytics">Pós-Graduação em Ciência de Dados e Big Data Analytics</h3>
         <div class="inst">Universidade Estácio de Sá</div>
       </div>
       <div class="edu-card reveal">
         <div class="yr">2015 — 2018</div>
-        <h3>Gestão da Tecnologia da Informação</h3>
+        <h3 data-i18n data-pt="Gestão da Tecnologia da Informação" data-en="Information Technology Management">Gestão da Tecnologia da Informação</h3>
         <div class="inst">Universidade Estácio de Sá</div>
       </div>
     </div>
@@ -660,27 +680,27 @@
 
 <section id="cursos">
   <div class="wrap">
-    <div class="eyebrow"><span class="idx">06</span> Desenvolvimento</div>
-    <h2 class="sec-title reveal">Cursos &amp; certificações</h2>
-    <p class="sec-lead reveal">Formação contínua em liderança, LGPD e desenvolvimento.</p>
+    <div class="eyebrow" data-i18n data-pt="06 Desenvolvimento" data-en="06 Development"><span class="idx">06</span> Desenvolvimento</div>
+    <h2 class="sec-title reveal" data-i18n data-pt="Cursos &amp; certificações" data-en="Courses &amp; certifications">Cursos &amp; certificações</h2>
+    <p class="sec-lead reveal" data-i18n data-pt="Formação contínua em liderança, LGPD e desenvolvimento." data-en="Ongoing training in leadership, LGPD, and development.">Formação contínua em liderança, LGPD e desenvolvimento.</p>
     <div class="courses">
       <div class="course reveal">
         <div class="c-info">
-          <div class="c-name">Workshop: API de Alta Escala em Laravel</div>
+          <div class="c-name" data-i18n data-pt="Workshop: API de Alta Escala em Laravel" data-en="Workshop: High-Scale APIs in Laravel">Workshop: API de Alta Escala em Laravel</div>
           <div class="c-inst">Beer and Code</div>
         </div>
-        <div class="c-meta"><span class="c-hours">6 h</span><span class="c-date">Abr 2026</span></div>
+        <div class="c-meta"><span class="c-hours">6 h</span><span class="c-date" data-i18n data-pt="Abr 2026" data-en="Apr 2026">Abr 2026</span></div>
       </div>
       <div class="course reveal">
         <div class="c-info">
-          <div class="c-name">Liderança e Gestão de Pessoas e Equipes</div>
+          <div class="c-name" data-i18n data-pt="Liderança e Gestão de Pessoas e Equipes" data-en="Leadership and People/Team Management">Liderança e Gestão de Pessoas e Equipes</div>
           <div class="c-inst">Udemy</div>
         </div>
         <div class="c-meta"><span class="c-hours">7,5 h</span><span class="c-date">Mar 2026</span></div>
       </div>
       <div class="course reveal">
         <div class="c-info">
-          <div class="c-name">Conceitos Básicos da LGPD V.01/24</div>
+          <div class="c-name" data-i18n data-pt="Conceitos Básicos da LGPD V.01/24" data-en="LGPD Basic Concepts V.01/24">Conceitos Básicos da LGPD V.01/24</div>
           <div class="c-inst">Somaxi / BeCompliance</div>
         </div>
         <div class="c-meta"><span class="c-hours">2 h</span><span class="c-date">Mar 2026</span></div>
@@ -694,7 +714,7 @@
       </div>
       <div class="course reveal">
         <div class="c-info">
-          <div class="c-name">3º Meeting de DPO's de Santa Catarina: cinco erros comuns das abordagens LGPD/GDPR</div>
+          <div class="c-name" data-i18n data-pt="3º Meeting de DPO's de Santa Catarina: cinco erros comuns das abordagens LGPD/GDPR" data-en="3rd Santa Catarina DPO Meeting: five common mistakes in LGPD/GDPR approaches">3º Meeting de DPO's de Santa Catarina: cinco erros comuns das abordagens LGPD/GDPR</div>
           <div class="c-inst">Doutorize Educacional</div>
         </div>
         <div class="c-meta"><span class="c-hours">1 h</span><span class="c-date">Jul 2020</span></div>
@@ -705,9 +725,9 @@
 
 <section id="contato" class="contact">
   <div class="wrap">
-    <div class="eyebrow"><span class="idx">07</span> Contato</div>
-    <h2>Vamos construir algo juntos.</h2>
-    <p>Aberto a conversas sobre projetos, sistemas e oportunidades. É só chamar.</p>
+    <div class="eyebrow" data-i18n data-pt="07 Contato" data-en="07 Contact"><span class="idx">07</span> Contato</div>
+    <h2 data-i18n data-pt="Vamos construir algo juntos." data-en="Let's build something together.">Vamos construir algo juntos.</h2>
+    <p data-i18n data-pt="Aberto a conversas sobre projetos, sistemas e oportunidades. É só chamar." data-en="Open to conversations about projects, systems, and opportunities. Just reach out.">Aberto a conversas sobre projetos, sistemas e oportunidades. É só chamar.</p>
     <div class="hero-cta">
       <!--<a class="btn btn-primary" id="mailBtn" href="#" rel="nofollow noopener">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
@@ -716,18 +736,61 @@
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/davydmartins/" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn-ghost" href="https://github.com/davydcm" target="_blank" rel="noopener">GitHub</a>
     </div>
-    <button id="copyMail" class="copy-link" type="button">copiar e-mail</button>
+    <button id="copyMail" class="copy-link" type="button" data-i18n data-pt="copiar e-mail" data-en="copy email">copiar e-mail</button>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
     <span class="mono">© 2026 Davyd Carlos Martins</span>
-    <span class="mono">Florianópolis · Brasil</span>
+    <span class="mono" data-i18n data-pt="Florianópolis · Brasil" data-en="Florianópolis · Brazil">Florianópolis · Brasil</span>
   </div>
 </footer>
 
 <script>
+  // ===== Alternância de idioma (PT / EN) =====
+  (function(){
+    var STORAGE_KEY = 'site-lang';
+    var toggle = document.getElementById('langToggle');
+    var titleEl = document.querySelector('title');
+    var descEl = document.getElementById('metaDesc');
+
+    function applyLang(lang){
+      document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : 'pt-BR');
+
+      document.querySelectorAll('[data-i18n]').forEach(function(el){
+        var text = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-pt');
+        if(text != null) el.innerHTML = text;
+      });
+
+      if(titleEl){
+        titleEl.textContent = lang === 'en' ? titleEl.getAttribute('data-en') : titleEl.getAttribute('data-pt');
+      }
+      if(descEl){
+        descEl.setAttribute('content', lang === 'en' ? descEl.getAttribute('data-en') : descEl.getAttribute('data-pt'));
+      }
+
+      if(toggle){
+        toggle.querySelectorAll('.lang-opt').forEach(function(opt){
+          opt.classList.toggle('is-active', opt.getAttribute('data-lang') === lang);
+        });
+      }
+
+      try{ localStorage.setItem(STORAGE_KEY, lang); }catch(e){}
+    }
+
+    var initial = 'pt';
+    try{ initial = localStorage.getItem(STORAGE_KEY) || 'pt'; }catch(e){}
+    if(initial === 'en') applyLang('en');
+
+    if(toggle){
+      toggle.addEventListener('click', function(){
+        var current = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'pt';
+        applyLang(current === 'en' ? 'pt' : 'en');
+      });
+    }
+  })();
+
   // Scroll reveal
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
@@ -757,9 +820,13 @@
     if(copy){
       copy.addEventListener('click', function(){
         var done = function(){
-          copy.textContent = '✓ e-mail copiado';
+          var isEn = document.documentElement.getAttribute('lang') === 'en';
+          copy.textContent = isEn ? '✓ email copied' : '✓ e-mail copiado';
           copy.classList.add('done');
-          setTimeout(function(){ copy.textContent = 'copiar e-mail'; copy.classList.remove('done'); }, 2200);
+          setTimeout(function(){
+            copy.textContent = isEn ? 'copy email' : 'copiar e-mail';
+            copy.classList.remove('done');
+          }, 2200);
         };
         if(navigator.clipboard && navigator.clipboard.writeText){
           navigator.clipboard.writeText(addr).then(done).catch(function(){ window.prompt('Copie o e-mail:', addr); });
